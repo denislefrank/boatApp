@@ -1,35 +1,18 @@
 package com.owt.boatapp.service;
 
-import com.owt.boatapp.persistance.mapper.BoatMapper;
-import com.owt.boatapp.persistance.repository.BoatRepository;
 import com.owt.boatapp.service.dto.BoatDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
-public class BoatService {
+public interface BoatService {
 
-    private final BoatRepository boatRepository;
-    private final BoatMapper mapper;
+    List<BoatDto> findAll();
 
-    public List<BoatDto> findAll() {
-        return boatRepository.findAll().stream().map(mapper::daoToDto).toList();
-    }
+    BoatDto findById(Long id);
 
-    public BoatDto findById(Long id) {
-        final var boatDao = boatRepository.findById(id).orElseThrow();
-        return mapper.daoToDto(boatDao);
-    }
+    BoatDto save(BoatDto boatDto);
 
-    public BoatDto save(BoatDto boatDto) {
-        final var boat = boatRepository.save(mapper.dtoToDao(boatDto));
-        return mapper.daoToDto(boat);
-    }
-
-    public void deleteById(Long id) {
-        boatRepository.deleteById(id);
-    }
+    void deleteById(Long id);
 }
