@@ -4,8 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class BoatModel {
+public class UserModel {
     @NotBlank
-    private String name;
-    private String description;
+    private String username;
+    @NotBlank
+    private String password;
 }
