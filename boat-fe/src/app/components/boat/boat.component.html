@@ -1,1 +1,13 @@
-<p>boat works!</p>
+<div class="container">
+    <ul class="collection with-header">
+        <li class="collection-header">
+            <h4>Boats</h4>
+        </li>
+        <li *ngFor="let boat of boats" class="collection-item">
+            <div>
+                {{ boat.name }}
+                <a class="secondary-content"><i class="material-icons">open_in_new</i></a>
+            </div>
+        </li>
+    </ul>
+</div>
