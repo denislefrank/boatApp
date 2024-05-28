@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/boat")
+@RestController
+@RequestMapping("/boat")
 @RequiredArgsConstructor
 public class BoatController {
 
@@ -20,7 +21,7 @@ public class BoatController {
 
     @GetMapping
     public ResponseEntity<List<BoatDto>> getAllBoats() {
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(boatService.findAll());
     }
 
     @GetMapping("/{id}")
@@ -30,7 +31,8 @@ public class BoatController {
 
     @PostMapping
     public ResponseEntity<BoatDto> createBoat(@RequestBody BoatModel boatModel) {
-        return ResponseEntity.ok(null);
+        final var createdBoat = boatService.save(mapper.modelToDto(boatModel));
+        return ResponseEntity.ok(createdBoat);
     }
 
     @PutMapping
