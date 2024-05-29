@@ -9,13 +9,17 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { BoatComponent } from './components/boat/boat.component';
+import { BoatFormComponent } from './components/boat/boat-form/boat-form.component';
+import { BoatDeleteComponent } from './components/boat/boat-delete/boat-delete.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    BoatComponent
+    BoatComponent,
+    BoatFormComponent,
+    BoatDeleteComponent
   ],
   imports: [
     BrowserModule,

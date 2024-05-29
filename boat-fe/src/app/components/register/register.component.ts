@@ -24,8 +24,8 @@ export class RegisterComponent {
         alert('Registration failed: ' + err.error);
       }
     });
-}
-  redirectLogin(){
+  }
+  redirectLogin() {
     this.router.navigate(['/login']);
   }
 }
