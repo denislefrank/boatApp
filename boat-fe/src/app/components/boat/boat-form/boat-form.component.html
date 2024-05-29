@@ -1,0 +1,19 @@
+<div id="addBoatModal" class="modal">
+    <div class="modal-content">
+      <h4>Add New Boat</h4>
+      <form (submit)="onSubmit()">
+        <div class="input-field">
+          <input id="name" type="text" [(ngModel)]="boat.name" name="name" required>
+          <label for="name">Name</label>
+        </div>
+        <div class="input-field">
+          <input id="type" type="text" [(ngModel)]="boat.description" name="type">
+          <label for="type">Description</label>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="modal-close btn waves-effect waves-light">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

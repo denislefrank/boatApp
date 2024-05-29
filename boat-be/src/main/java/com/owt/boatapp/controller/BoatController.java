@@ -26,7 +26,7 @@ public class BoatController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BoatDto> getBoatById(@PathVariable Long id) {
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(boatService.findById(id));
     }
 
     @PostMapping
@@ -37,11 +37,13 @@ public class BoatController {
 
     @PutMapping
     public ResponseEntity<BoatDto> updateBoat(@RequestBody BoatDto boatDto) {
-        return ResponseEntity.ok(null);
+        final var updatedBoat = boatService.update(boatDto);
+        return ResponseEntity.ok(updatedBoat);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBoat(@PathVariable Long id) {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<Long> deleteBoat(@PathVariable Long id) {
+        boatService.deleteById(id);
+        return ResponseEntity.ok(id);
     }
 }

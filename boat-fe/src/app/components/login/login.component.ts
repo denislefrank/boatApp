@@ -16,7 +16,7 @@ export class LoginComponent {
 
   onSubmit() {
     this.authService.login(this.email, this.password).subscribe({
-      next: (response) => {
+      next: () => {
         this.router.navigate(['/boat']);
       },
       error: (err) => {

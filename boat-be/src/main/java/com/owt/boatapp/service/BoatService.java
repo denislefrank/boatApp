@@ -14,5 +14,7 @@ public interface BoatService {
 
     BoatDto save(BoatDto boatDto);
 
+    BoatDto update(BoatDto boatDto);
+
     void deleteById(Long id);
 }
