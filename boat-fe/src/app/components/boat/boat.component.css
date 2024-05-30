@@ -1,0 +1,14 @@
+.botton-right {
+    left: auto;
+    right: 20;
+    padding-top: 0;
+}
+
+.btn-small {
+    height: 25px;
+    line-height: 25px;
+}
+
+.spacing-right-15 {
+    margin-right: 15px;
+}

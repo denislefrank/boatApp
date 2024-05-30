@@ -21,26 +21,29 @@ public class BoatController {
 
     @GetMapping
     public ResponseEntity<List<BoatDto>> getAllBoats() {
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(boatService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<BoatDto> getBoatById(@PathVariable Long id) {
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(boatService.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<BoatDto> createBoat(@RequestBody BoatModel boatModel) {
-        return ResponseEntity.ok(null);
+        final var createdBoat = boatService.save(mapper.modelToDto(boatModel));
+        return ResponseEntity.ok(createdBoat);
     }
 
     @PutMapping
     public ResponseEntity<BoatDto> updateBoat(@RequestBody BoatDto boatDto) {
-        return ResponseEntity.ok(null);
+        final var updatedBoat = boatService.update(boatDto);
+        return ResponseEntity.ok(updatedBoat);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBoat(@PathVariable Long id) {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<Long> deleteBoat(@PathVariable Long id) {
+        boatService.deleteById(id);
+        return ResponseEntity.ok(id);
     }
 }
