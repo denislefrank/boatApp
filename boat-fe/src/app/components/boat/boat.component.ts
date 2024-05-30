@@ -27,7 +27,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.auth.isLoggedIn() ? null : this.router.navigate(['/login']); ;
+    this.auth.isLoggedIn() ? null : this.router.navigate(['/login']);;
     this.getBoats();
     document.addEventListener('DOMContentLoaded', function () {
       const modalElement = document.querySelectorAll('.modal');
