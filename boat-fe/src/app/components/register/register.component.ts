@@ -15,13 +15,11 @@ export class RegisterComponent {
 
   onSubmit() {
     this.authService.register(this.email, this.password).subscribe({
-      next: (response) => {
-        console.log('Registration successful', response);
+      next: () => {
         this.router.navigate(['/login']);
       },
       error: (err) => {
         console.error('Registration failed', err);
-        alert('Registration failed: ' + err.error);
       }
     });
   }
