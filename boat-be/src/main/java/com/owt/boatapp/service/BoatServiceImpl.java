@@ -40,7 +40,7 @@ public class BoatServiceImpl implements BoatService {
 
     @Override
     public BoatDto update(BoatDto boatDto) {
-        log.info("Updating given Entity with id {}", boatDto.getId());
+        log.info("Updating given Entity with id {}", boatDto.id());
         final var boatDao = boatRepository.save(mapper.dtoToDao(boatDto));
         log.debug("Updated given Entity with id {}", boatDao.getId());
         return mapper.daoToDto(boatDao);

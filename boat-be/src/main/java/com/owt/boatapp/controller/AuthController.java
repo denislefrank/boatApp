@@ -2,7 +2,7 @@ package com.owt.boatapp.controller;
 
 import com.owt.boatapp.controller.model.UserModel;
 import com.owt.boatapp.persistance.mapper.UserMapper;
-import com.owt.boatapp.service.UserServiceImpl;
+import com.owt.boatapp.service.UserService;
 import com.owt.boatapp.service.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     private final UserMapper mapper;
 
@@ -27,7 +27,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Object> createAuthenticationToken(@RequestBody UserModel authRequest) throws Exception {
+    public ResponseEntity<Object> loginUser(@RequestBody UserModel authRequest) {
         final var userDto = userService.login(mapper.modelToDto(authRequest));
         return ResponseEntity.ok(userDto);
     }

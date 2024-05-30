@@ -1,19 +1,26 @@
-<div id="addBoatModal" class="modal">
-    <div class="modal-content">
-      <h4>Add New Boat</h4>
-      <form (submit)="onSubmit()">
-        <div class="input-field">
-          <input id="name" type="text" [(ngModel)]="boat.name" name="name" required>
-          <label for="name">Name</label>
-        </div>
-        <div class="input-field">
-          <input id="type" type="text" [(ngModel)]="boat.description" name="type">
-          <label for="type">Description</label>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="modal-close btn waves-effect waves-light">Submit</button>
-        </div>
-      </form>
+<div id="boatFormModal" class="modal">
+  <div class="modal-content">
+    <h4 *ngIf="boat.id === 0 && !viewMode">Add New Boat</h4>
+    <h4 *ngIf="boat.id && !viewMode">Edit Boat</h4>
+    <h4 *ngIf="boat.id && viewMode">View Boat</h4>
+    <form (submit)="onSubmit()" *ngIf="!viewMode">
+      <div class="input-field">
+        <input id="name" type="text" [(ngModel)]="boat.name" name="name" required>
+        <label for="name">Name</label>
+      </div>
+      <div class="input-field">
+        <input id="type" type="text" [(ngModel)]="boat.description" name="type">
+        <label for="type">Description</label>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="modal-close btn waves-effect waves-light">Submit</button>
+      </div>
+    </form>
+    <div *ngIf="viewMode">
+      <p><strong>Name:</strong> {{ boat.name }}</p>
+      <p><strong>Description:</strong> {{ boat.description }}</p>
+      <div class="modal-footer">
+        <button class="modal-close waves-effect waves-green btn-flat">Close</button>
+      </div>
     </div>
   </div>
-  

@@ -13,10 +13,9 @@ export class BoatFormComponent {
   @Input() boat: Boat = { id: 0, name: '', description: '' };
   @Output() boatAdded = new EventEmitter<void>();
   @Output() boatUpdated = new EventEmitter<void>();
+  viewMode: boolean = false;
 
-
-  constructor(private boatService: BoatService) {
-  }
+  constructor(private boatService: BoatService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['boat'] && changes['boat'].currentValue) {
@@ -40,8 +39,15 @@ export class BoatFormComponent {
   }
 
   closeModal() {
-    const modalElement = document.querySelector('#addBoatModal');
+    const modalElement = document.querySelector('#boatFormModal');
     const modalInstance = M.Modal.getInstance(modalElement);
     modalInstance.close();
+  }
+
+  openModal(viewMode: boolean = false) {
+    this.viewMode = viewMode;
+    const modalElement = document.querySelector('#boatFormModal');
+    const modalInstance = M.Modal.getInstance(modalElement);
+    modalInstance.open();
   }
 }

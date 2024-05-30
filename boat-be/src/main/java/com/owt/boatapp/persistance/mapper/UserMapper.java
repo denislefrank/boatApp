@@ -13,8 +13,6 @@ public interface UserMapper {
 
     UserDao dtoToDao(UserDto boatDto);
 
-    UserModel dtoToModel(UserDto boatDto);
-
     @Mapping(target = "id", ignore = true)
     UserDto modelToDto(UserModel boatModel);
 

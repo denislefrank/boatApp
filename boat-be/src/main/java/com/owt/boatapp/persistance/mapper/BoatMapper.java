@@ -14,8 +14,6 @@ public interface BoatMapper {
 
     BoatDao dtoToDao(BoatDto boatDto);
 
-    BoatModel dtoToModel(BoatDto boatDto);
-
     @Mapping(target = "id", ignore = true)
     BoatDto modelToDto(BoatModel boatModel);
 }
