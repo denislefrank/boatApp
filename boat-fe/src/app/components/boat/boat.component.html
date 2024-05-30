@@ -10,7 +10,7 @@
         <li *ngFor="let boat of boats" class="collection-item">
             <div>
                 {{ boat.name }}
-                <button class="btn-small modal-trigger right indigo lighten-5" data-target="addBoatModal"
+                <button class="btn-small modal-trigger right indigo lighten-5" data-target="boatFormModal"
                     (click)="openEditBoatModal(boat)">
                     <a class="secondary-content">
                         <i class="material-icons">edit</i>
@@ -22,10 +22,16 @@
                         <i class="material-icons">delete</i>
                     </a>
                 </button>
+                <button class="btn-small modal-trigger right indigo lighten-5 spacing-right-15"
+                    data-target="boatFormModal" (click)="openViewBoatModal(boat)">
+                    <a class="secondary-content">
+                        <i class="material-icons">visibility</i>
+                    </a>
+                </button>
             </div>
         </li>
     </ul>
-    <button data-target="addBoatModal" (click)="openNewBoatModal()"
+    <button data-target="boatFormModal" (click)="openNewBoatModal()"
         class="fixed-action-btn btn modal-trigger botton-right">Add Boat</button>
 
     <app-boat-form [boat]="selectedBoat" (boatAdded)="getBoats()" (boatUpdated)="getBoats()"></app-boat-form>

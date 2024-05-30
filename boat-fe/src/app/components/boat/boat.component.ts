@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BoatService } from 'src/app/service/boat.service';
 import { Boat } from './boat';
+import { BoatFormComponent } from './boat-form/boat-form.component';
+import { AuthService } from 'src/app/service/auth.service';
+import { Router } from '@angular/router';
 
 declare var M: any;
 
@@ -9,13 +12,22 @@ declare var M: any;
   templateUrl: './boat.component.html',
   styleUrls: ['./boat.component.css']
 })
-export class BoatComponent {
+export class BoatComponent implements OnInit, AfterViewInit {
   boats: Boat[] = [];
   selectedBoat: Boat = { id: 0, name: '', description: '' };
 
-  constructor(private boatService: BoatService) { }
+  @ViewChild(BoatFormComponent)
+  boatFormComponent!: BoatFormComponent;
+
+  constructor(private boatService: BoatService, private auth: AuthService, private router: Router) { }
+
+  ngAfterViewInit(): void {
+    const modals = document.querySelectorAll('.modal');
+    M.Modal.init(modals);
+  }
 
   ngOnInit(): void {
+    this.auth.isLoggedIn() ? null : this.router.navigate(['/login']); ;
     this.getBoats();
     document.addEventListener('DOMContentLoaded', function () {
       const modalElement = document.querySelectorAll('.modal');
@@ -32,16 +44,17 @@ export class BoatComponent {
 
   openNewBoatModal(): void {
     this.selectedBoat = { id: 0, name: '', description: '' };
-    const modalElement = document.querySelector('#addBoatModal');
-    const modalInstance = M.Modal.getInstance(modalElement);
-    modalInstance.open();
+    this.boatFormComponent.openModal(false);
   }
 
   openEditBoatModal(boat: Boat): void {
     this.selectedBoat = { ...boat };
-    const modalElement = document.querySelector('#addBoatModal');
-    const modalInstance = M.Modal.getInstance(modalElement);
-    modalInstance.open();
+    this.boatFormComponent.openModal(false);
+  }
+
+  openViewBoatModal(boat: Boat): void {
+    this.selectedBoat = { ...boat };
+    this.boatFormComponent.openModal(true);
   }
 
   openDeleteBoatModal(boat: Boat): void {
