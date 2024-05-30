@@ -1,10 +1,4 @@
 package com.owt.boatapp.service.dto;
 
-import lombok.Data;
-
-@Data
-public class BoatDto {
-    private Long id;
-    private String name;
-    private String description;
+public record BoatDto(Long id, String name, String description) {
 }

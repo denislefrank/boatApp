@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto login(UserDto userDto) {
-        final var userDao = repository.findByUsername(userDto.getUsername()).orElseThrow();
-        if (verifyHashedString(userDto.getPassword(), userDao.getPassword())) {
+        final var userDao = repository.findByUsername(userDto.password()).orElseThrow();
+        if (verifyHashedString(userDto.password(), userDao.getPassword())) {
             return mapper.daoToDto(userDao);
         }
         throw new IllegalArgumentException("OWT-000001: User doest exist");
@@ -30,24 +30,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto register(UserDto userDto) {
-        userDto.setPassword(hashString(userDto.getPassword()));
-        final var createdDao = repository.save(mapper.dtoToDao(userDto));
+        final var hashedUser = new UserDto(userDto.id(), userDto.username(), hashString(userDto.password()));
+        final var createdDao = repository.save(mapper.dtoToDao(hashedUser));
         return mapper.daoToDto(createdDao);
     }
 
     private String hashString(String plain) {
-        BcryptFunction bcrypt = BcryptFunction.getInstance(Bcrypt.B, 12);
-
-        Hash hash = Password.hash(plain)
-                .addPepper(SECRET)
-                .with(bcrypt);
-
+        final BcryptFunction bcrypt = BcryptFunction.getInstance(Bcrypt.B, 12);
+        final Hash hash = Password.hash(plain).addPepper(SECRET).with(bcrypt);
         return hash.getResult();
     }
 
     public boolean verifyHashedString(String plainString, String hashedString) {
-        BcryptFunction bcrypt = BcryptFunction.getInstance(Bcrypt.B, 12);
-
+        final BcryptFunction bcrypt = BcryptFunction.getInstance(Bcrypt.B, 12);
         return Password.check(plainString, hashedString)
                 .addPepper(SECRET)
                 .with(bcrypt);
