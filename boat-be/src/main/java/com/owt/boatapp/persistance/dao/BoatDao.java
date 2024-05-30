@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 public class BoatDao {
 
     @Id
