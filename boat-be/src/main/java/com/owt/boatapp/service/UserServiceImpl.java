@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto login(UserDto userDto) {
-        final var userDao = repository.findByUsername(userDto.password()).orElseThrow();
+        final var userDao = repository.findByUsername(userDto.username()).orElseThrow();
         if (verifyHashedString(userDto.password(), userDao.getPassword())) {
             return mapper.daoToDto(userDao);
         }
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         return hash.getResult();
     }
 
-    public boolean verifyHashedString(String plainString, String hashedString) {
+    private boolean verifyHashedString(String plainString, String hashedString) {
         final BcryptFunction bcrypt = BcryptFunction.getInstance(Bcrypt.B, 12);
         return Password.check(plainString, hashedString)
                 .addPepper(SECRET)
